@@ -9,7 +9,7 @@
 ---
 
 ## 1. 中文教程
-
+相关中文教程：[人工智能服务器配置，适合需要自己配置服务器，有一定用户管理需求的高校实验室](https://github.com/gyguo/AI-Server-Configuration-CN)
 ### 1) 设置教程
 所有操作必须使用root账号
 
