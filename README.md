@@ -48,7 +48,7 @@ sudo crontab -l
 
 ### 2) ic.py
 这是一个简单python脚本，对**大陆**用户，判断能够打开**百度和淘宝**两个网页，两个网站**同时打不开**时选择重新拨号
-
+**Python 2**版本
 ```
 import urllib2 as ulb
 import logging
@@ -95,6 +95,52 @@ else:
     network_redial()
 ```
 
+**Python 3**版本: `pip install urllib3`
+```
+import urllib.request
+import logging
+import subprocess
+import os
+
+def network_status(url, num_attempts=10):
+    attempts = 0
+    while True:
+        print('try {}/{} to {}'.format(attempts+1, num_attempts, url))
+        try:
+            urllib.request.urlopen(url, timeout=3)
+        except:
+            attempts += 1
+            if attempts == num_attempts:
+                return False
+            else:
+                continue
+        break
+    return True
+
+def network_redial():
+    command_off = 'sudo poff dsl-provider'
+    command_on = 'sudo pon dsl-provider'
+
+    print('network dailing')
+    try:
+        os.system(command_off)
+    except:
+        logging.warnings('fail to running poff')
+
+    os.system(command_on)
+
+# for China mainland uses
+url1 = 'https://www.baidu.com/'
+url2 = 'https://www.taobao.com/'
+
+is_connect1 = network_status(url1, num_attempts=10)
+is_connect2 = network_status(url2, num_attempts=10)
+if is_connect1 or is_connect2:
+    print("Network reconnect successfully")
+else:
+    logging.warning('Network connection failed, redial')
+    network_redial()
+```
 ---
 
 
@@ -139,7 +185,7 @@ sudo crontab -l
 
 ### 2) ic.py
 This is a simple Python script to determine if they can open **Google and X** web pages, and if both websites **cannot be opened at the same time**, choose to redial
-
+**Python 2** Version
 ```
 import urllib2 as ulb
 import logging
@@ -185,4 +231,48 @@ else:
     network_redial()
 ```
 
+**Python 3** Version: `pip install urllib3`
+```
+import urllib.request
+import logging
+import subprocess
+import os
 
+def network_status(url, num_attempts=10):
+    attempts = 0
+    while True:
+        print('try {}/{} to {}'.format(attempts+1, num_attempts, url))
+        try:
+            urllib.request.urlopen(url, timeout=3)
+        except:
+            attempts += 1
+            if attempts == num_attempts:
+                return False
+            else:
+                continue
+        break
+    return True
+
+def network_redial():
+    command_off = 'sudo poff dsl-provider'
+    command_on = 'sudo pon dsl-provider'
+
+    print('network dailing')
+    try:
+        os.system(command_off)
+    except:
+        logging.warnings('fail to running poff')
+
+    os.system(command_on)
+
+url1 = 'https://www.google.com/'
+url2 = 'https://www.x.com/'
+
+is_connect1 = network_status(url1, num_attempts=10)
+is_connect2 = network_status(url2, num_attempts=10)
+if is_connect1 or is_connect2:
+    print("Network reconnect successfully")
+else:
+    logging.warning('Network connection failed, redial')
+    network_redial()
+```
