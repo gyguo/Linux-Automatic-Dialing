@@ -48,7 +48,7 @@ sudo crontab -l
 
 ### 2) ic.py
 这是一个简单python脚本，对**大陆**用户，判断能够打开**百度和淘宝**两个网页，两个网站**同时打不开**时选择重新拨号
-**Python 2**版本
+- **Python 2**版本
 ```
 import urllib2 as ulb
 import logging
@@ -95,7 +95,7 @@ else:
     network_redial()
 ```
 
-**Python 3**版本: `pip install urllib3`
+- **Python 3**版本: `pip install urllib3`
 ```
 import urllib.request
 import logging
@@ -185,7 +185,7 @@ sudo crontab -l
 
 ### 2) ic.py
 This is a simple Python script to determine if they can open **Google and X** web pages, and if both websites **cannot be opened at the same time**, choose to redial
-**Python 2** Version
+- **Python 2** Version
 ```
 import urllib2 as ulb
 import logging
@@ -231,7 +231,7 @@ else:
     network_redial()
 ```
 
-**Python 3** Version: `pip install urllib3`
+- **Python 3** Version: `pip install urllib3`
 ```
 import urllib.request
 import logging
